@@ -15,7 +15,9 @@ categories = ["asynchronous", "concurrency", "rust-patterns"]
 include = ["Cargo.toml", "README-crates-io.md", "src/**/*.rs"]
 
 [dependencies]
+crossbeam = { version = "0.8", default-features = false }
 futures-core = { version = "0.3.1", optional = true }
+spin = { version = "0.9", optional = true }
 genawaiter-proc-macro = { version = "0.99.1", path = "./genawaiter-proc-macro", optional = true }
 genawaiter-macro = { version = "0.99.1", path = "./genawaiter-macro" }
 
@@ -33,5 +35,6 @@ trybuild = "1"
 default = ["proc_macro"]
 futures03 = ["futures-core"]
 nightly = []
+std = []
 strict = []
 proc_macro = ["genawaiter-proc-macro", "genawaiter-macro/proc_macro"]

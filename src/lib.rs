@@ -230,7 +230,7 @@ works even without the `futures03` feature.)
 # #[cfg(feature = "proc_macro")]
 # async fn feature_gate() {
 # use genawaiter::{sync::gen, yield_, GeneratorState};
-# use std::task::Poll;
+# use core::task::Poll;
 #
 # let mut gen = gen!({
 #     yield_!(10);
@@ -260,6 +260,12 @@ resume argument type to `()`, but in a `Coroutine` it can be anything.
 #![warn(future_incompatible, rust_2018_compatibility, rust_2018_idioms, unused)]
 #![warn(missing_docs, clippy::cargo, clippy::pedantic)]
 #![cfg_attr(feature = "strict", deny(warnings))]
+#![no_std]
+
+extern crate alloc;
+
+#[cfg(feature = "std")]
+extern crate std;
 
 #[cfg(test)]
 extern crate self as genawaiter;

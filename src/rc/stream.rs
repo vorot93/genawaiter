@@ -1,9 +1,9 @@
 use crate::{ops::GeneratorState, rc::Gen};
+use core::{future::Future, pin::Pin};
 use futures_core::{
     task::{Context, Poll},
     Stream,
 };
-use std::{future::Future, pin::Pin};
 
 impl<Y, F: Future<Output = ()>> Stream for Gen<Y, (), F> {
     type Item = Y;
@@ -28,6 +28,7 @@ mod tests {
         rc::{Co, Gen},
         testing::SlowFuture,
     };
+    use alloc::vec::Vec;
     use futures_executor::block_on_stream;
     use futures_util::stream;
 

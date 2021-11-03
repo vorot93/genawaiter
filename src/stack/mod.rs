@@ -345,12 +345,10 @@ mod tests {
         testing::DummyFuture,
         GeneratorState,
     };
-    use std::{
+    use alloc::{sync::Arc, vec::Vec};
+    use core::{
         cell::RefCell,
-        sync::{
-            atomic::{AtomicBool, Ordering},
-            Arc,
-        },
+        sync::atomic::{AtomicBool, Ordering},
     };
 
     async fn simple_producer(mut co: Co<'_, i32>) -> &'static str {

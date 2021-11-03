@@ -60,7 +60,7 @@ synchronization. Here is one possible pattern, using the [`once_cell`] crate.
 [`once_cell`]: https://crates.io/crates/once_cell
 
 ```
-# #[cfg(feature = "proc_macro")]
+# #[cfg(all(feature = "proc_macro", feature = "std"))]
 # fn feature_gate() {
 use genawaiter::{sync::{Gen, GenBoxed}, sync_producer as producer, yield_};
 use once_cell::sync::Lazy;
@@ -354,6 +354,7 @@ mod tests {
         testing::{DummyFuture, SlowFuture},
         GeneratorState,
     };
+    use alloc::vec::Vec;
     use futures_executor::block_on;
     use std::{
         cell::{Cell, RefCell},

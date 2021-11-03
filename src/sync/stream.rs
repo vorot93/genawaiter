@@ -28,6 +28,7 @@ mod tests {
         sync::{Co, Gen},
         testing::SlowFuture,
     };
+    use alloc::vec::Vec;
     use futures_executor::block_on_stream;
     use futures_util::stream;
 

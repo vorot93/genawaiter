@@ -321,7 +321,8 @@ mod tests {
         testing::DummyFuture,
         GeneratorState,
     };
-    use std::{
+    use alloc::vec::Vec;
+    use core::{
         cell::{Cell, RefCell},
         future::Future,
     };

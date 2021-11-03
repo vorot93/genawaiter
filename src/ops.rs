@@ -1,4 +1,4 @@
-use std::pin::Pin;
+use core::pin::Pin;
 
 /// A trait implemented for coroutines.
 ///
@@ -50,7 +50,7 @@ impl<C: Coroutine<Resume = ()>> Generator for C {
 /// The result of a generator resumption.
 ///
 /// This is modeled after the stdlib's nightly-only
-/// [`std::ops::GeneratorState`].
+/// [`core::ops::GeneratorState`].
 #[derive(PartialEq, Debug)]
 #[allow(clippy::module_name_repetitions)]
 pub enum GeneratorState<Y, R> {

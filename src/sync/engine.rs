@@ -1,8 +1,7 @@
 use crate::{core, core::Next};
-use std::{
-    mem,
-    sync::{Arc, Mutex},
-};
+use ::core::mem;
+use alloc::sync::Arc;
+use spin::Mutex;
 
 pub struct Airlock<Y, R>(Arc<Mutex<Next<Y, R>>>);
 
@@ -23,11 +22,11 @@ impl<Y, R> core::Airlock for Airlock<Y, R> {
     type Resume = R;
 
     fn peek(&self) -> Next<(), ()> {
-        self.0.lock().unwrap().without_values()
+        self.0.lock().without_values()
     }
 
     fn replace(&self, next: Next<Y, R>) -> Next<Y, R> {
-        mem::replace(&mut self.0.lock().unwrap(), next)
+        mem::replace(&mut self.0.lock(), next)
     }
 }
 
