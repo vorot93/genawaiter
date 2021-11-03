@@ -27,7 +27,7 @@ mod visit;
 pub fn stack_producer_fn(args: TokenStream, input: TokenStream) -> TokenStream {
     let a = args.clone();
     // make sure it is a valid type
-    let _ = parse_macro_input!(a as Type);
+    std::mem::drop(parse_macro_input!(a as Type));
     let mut function = parse_macro_input!(input as ItemFn);
 
     let co_arg = format!("{}{}>", stack::CO_ARG_FN, args);
@@ -61,7 +61,7 @@ pub fn stack_producer(input: TokenStream) -> TokenStream {
 pub fn sync_producer_fn(args: TokenStream, input: TokenStream) -> TokenStream {
     let a = args.clone();
     // make sure it is a valid type
-    let _ = parse_macro_input!(a as Type);
+    std::mem::drop(parse_macro_input!(a as Type));
     let mut function = parse_macro_input!(input as ItemFn);
 
     let co_arg = format!("{}{}>", sync::CO_ARG_FN, args);
@@ -94,7 +94,7 @@ pub fn sync_producer(input: TokenStream) -> TokenStream {
 pub fn rc_producer_fn(args: TokenStream, input: TokenStream) -> TokenStream {
     let a = args.clone();
     // make sure it is a valid type
-    let _ = parse_macro_input!(a as Type);
+    std::mem::drop(parse_macro_input!(a as Type));
     let mut function = parse_macro_input!(input as ItemFn);
 
     let co_arg = format!("{}{}>", rc::CO_ARG_FN, args);
@@ -172,5 +172,5 @@ fn add_coroutine_arg(func: &mut ItemFn, co_ty: &str) {
         Ok(s) => s,
         Err(err) => abort_call_site!(format!("invalid type for Co yield {}", err)),
     };
-    func.sig.inputs.push_value(co_arg)
+    func.sig.inputs.push_value(co_arg);
 }
