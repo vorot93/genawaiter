@@ -466,11 +466,11 @@ mod tests {
             // cannot be dropped early.
             #[allow(clippy::drop_ref)]
             drop(gen);
-            assert_eq!(flag.load(Ordering::SeqCst), false);
+            assert!(!flag.load(Ordering::SeqCst));
         }
         // After the block above ends, the generator goes out of scope and is dropped,
         // which drops the incomplete future, which drops `_set_on_drop`, which sets the
         // flag.
-        assert_eq!(flag.load(Ordering::SeqCst), true);
+        assert!(flag.load(Ordering::SeqCst));
     }
 }
